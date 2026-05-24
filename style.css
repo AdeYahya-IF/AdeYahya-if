@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0f0e17;
+    --surface: #1a1830;
+    --card: #1e1c35;
+    --accent: #ff6b6b;
+    --accent2: #ffd93d;
+    --accent3: #6bcb77;
+    --text-primary: #fffffe;
+    --text-secondary: #a7a9be;
+    --border: rgba(255, 255, 255, 0.08);
+    --glow: rgba(255, 107, 107, 0.15);
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(255, 107, 107, 0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(107, 203, 119, 0.07) 0%, transparent 50%);
+}
+
+#con-judul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+#judul {
+    text-align: center;
+}
+
+#judul h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcb77 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 14px;
+}
+
+#judul p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+#con-topik {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    min-height: 500px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.topik {
+    text-align: left;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 25px;
+    width: 100%;
+    max-width: 320px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.topik:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.topik h3 {
+    font-size: 1.25rem;
+    text-transform: capitalize;
+    margin-bottom: 12px;
+}
+
+.topik p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.topik:nth-child(1) h3, .topik:nth-child(4) h3 { color: var(--accent); }
+.topik:nth-child(2) h3, .topik:nth-child(5) h3 { color: var(--accent2); }
+.topik:nth-child(3) h3, .topik:nth-child(6) h3 { color: var(--accent3); }
+
+
+/* ============================================
+   BAGIAN CONTOH INTERAKTIF
+   ============================================ */
+
+#con-contoh {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+    border-top: 1px solid var(--border);
+}
+
+#judul-contoh {
+    text-align: center;
+    padding: 40px 20px 30px;
+}
+
+#judul-contoh h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcb77 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+}
+
+#judul-contoh p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.contoh-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.contoh-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.contoh-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 25px;
+    border-bottom: 1px solid var(--border);
+}
+
+.contoh-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: capitalize;
+}
+
+.contoh-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.badge-merah  { background: rgba(255,107,107,0.15); color: var(--accent);  border: 1px solid rgba(255,107,107,0.3); }
+.badge-kuning { background: rgba(255,217,61,0.15);  color: var(--accent2); border: 1px solid rgba(255,217,61,0.3); }
+.badge-hijau  { background: rgba(107,203,119,0.15); color: var(--accent3); border: 1px solid rgba(107,203,119,0.3); }
+
+.contoh-body {
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contoh-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.contoh-input {
+    flex: 1;
+    min-width: 160px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: sans-serif;   /* sama dengan font body */
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.contoh-input:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.contoh-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: sans-serif;   /* sama dengan font body */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.contoh-btn:hover  { transform: translateY(-2px); filter: brightness(1.1); }
+.contoh-btn:active { transform: translateY(0); }
+
+.btn-merah   { background: var(--accent);  color: #0f0e17; }
+.btn-kuning  { background: var(--accent2); color: #0f0e17; }
+.btn-hijau   { background: var(--accent3); color: #0f0e17; }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+
+.contoh-output {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: sans-serif;   /* sama dengan font body */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    min-height: 50px;
+    line-height: 1.6;
+    transition: color 0.3s;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.contoh-output.aktif {
+    color: var(--text-primary);
+}
