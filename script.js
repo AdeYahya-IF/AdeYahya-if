@@ -1,350 +1,112 @@
-// ============================================
-// script.js - Logika Contoh Interaktif
-// Pemrograman Dasar
-// ============================================
+// Data Algoritma
+const algoritmaData = [
+    { title: "Bubble Sort", desc: "Mengurutkan dengan menukar elemen bersebelahan. O(n²).", code: "for(let i=0; i<n-1; i++)\n  for(let j=0; j<n-i-1; j++)\n    if(arr[j]>arr[j+1]) [arr[j],arr[j+1]]=[arr[j+1],arr[j]];" },
+    { title: "Binary Search", desc: "Pencarian cepat di array terurut. O(log n).", code: "function binarySearch(arr, x) {\n  let l=0, r=arr.length-1;\n  while(l<=r) {\n    let mid=Math.floor((l+r)/2);\n    if(arr[mid]===x) return mid;\n    else if(arr[mid]<x) l=mid+1;\n    else r=mid-1;\n  }\n  return -1;\n}" },
+    { title: "Rekursi (Faktorial)", desc: "Fungsi memanggil diri sendiri.", code: "function faktorial(n) {\n  if(n<=1) return 1;\n  return n * faktorial(n-1);\n}" }
+];
 
+const strukturDataData = [
+    { title: "Stack", desc: "LIFO: push, pop. Contoh: undo/redo.", code: "class Stack {\n  constructor() { this.items=[]; }\n  push(item){ this.items.push(item); }\n  pop(){ return this.items.pop(); }\n}" },
+    { title: "Queue", desc: "FIFO: enqueue, dequeue.", code: "class Queue {\n  constructor(){ this.items=[]; }\n  enqueue(item){ this.items.push(item); }\n  dequeue(){ return this.items.shift(); }\n}" },
+    { title: "Linked List", desc: "Node saling terhubung.", code: "class Node { constructor(data){ this.data=data; this.next=null; } }" },
+    { title: "Binary Tree", desc: "Struktur hierarkis dengan root.", code: "class TreeNode {\n  constructor(val){ this.val=val; this.left=null; this.right=null; }\n}" }
+];
 
-// ============================================
-// DEMO 1: VARIABEL
-// Menunjukkan cara menyimpan dan menggunakan variabel
-// ============================================
+// RINGKASAN MATERI YANG LEBIH PANJANG & MENDALAM
+const summaryHTML = `
+    <h3><i class="fas fa-chart-line"></i> Kompleksitas Waktu (Big-O)</h3>
+    <p>Notasi Big-O digunakan untuk mengukur efisiensi algoritma berdasarkan waktu running dan memori yang dibutuhkan seiring bertambahnya ukuran input (n). Berikut perbandingan beberapa struktur data dan algoritma umum:</p> </br>
+    <table class="summary-table">
+        <tr><th>Struktur/Algoritma</th><th>Rata-rata</th><th>Terburuk</th></tr>
+        <tr><td>Bubble Sort</td><td>O(n²)</td><td>O(n²)</td></tr>
+        <tr><td>Binary Search (pada array terurut)</td><td>O(log n)</td><td>O(log n)</td></tr>
+        <tr><td>Stack / Queue (operasi push/pop/enqueue/dequeue)</td><td>O(1)</td><td>O(1)</td></tr>
+        <tr><td>Linked List (pencarian)</td><td>O(n)</td><td>O(n)</td></tr>
+        <tr><td>Binary Search Tree (seimbang)</td><td>O(log n)</td><td>O(n)</td></tr>
+    </table>
+    <p><strong>Penjelasan tambahan:</strong> Algoritma dengan O(1) adalah yang tercepat (konstan), O(log n) sangat baik (pembagian data), O(n) linear, dan O(n²) kuadratik (lambat untuk data besar).</p>
 
-function demoVariable() {
-    // Ambil nilai dari input nama dan usia
-    let nama = document.getElementById("var-nama").value;
-    let usia = document.getElementById("var-usia").value;
+    <h3><i class="fas fa-database"></i> Poin Penting Struktur Data</h3>
+    <ul class="summary-list">
+        <li><i class="fas fa-check-circle"></i> <strong>Array:</strong> Akses elemen O(1) via indeks, namun insert/delete di tengah membutuhkan O(n) karena pergeseran elemen. Cocok untuk data statis dan akses acak.</li>
+        <li><i class="fas fa-check-circle"></i> <strong>Stack & Queue:</strong> Stack (LIFO) digunakan pada mekanisme undo, pemanggilan fungsi (call stack), dan evaluasi ekspresi. Queue (FIFO) dipakai pada antrian proses, BFS (Breadth-First Search), dan manajemen tugas.</li>
+        <li><i class="fas fa-check-circle"></i> <strong>Linked List:</strong> Memori dinamis dan tidak kontigu. Insert/delete di awal atau akhir O(1) (jika diketahui pointer). Pencarian tetap O(n). Cocok untuk aplikasi yang sering menambah/menghapus data.</li>
+        <li><i class="fas fa-check-circle"></i> <strong>Hash Table:</strong> Pencarian, insert, delete rata-rata O(1) dengan fungsi hash yang baik. Kekurangan: tidak mempertahankan urutan dan bisa terjadi collision (tabrakan hash) yang ditangani dengan chaining atau open addressing.</li>
+        <li><i class="fas fa-check-circle"></i> <strong>Binary Search Tree (BST):</strong> Menyimpan data terurut. Pencarian, insert, delete rata-rata O(log n) jika pohon seimbang. Namun dapat menjadi O(n) jika tidak seimbang (menyerupai linked list). Solusi: menggunakan pohon seimbang seperti AVL atau Red-Black Tree.</li>
+    </ul>
 
-    // Cek apakah kedua input sudah diisi
-    if (nama === "" || usia === "") {
-        tampilkanOutput("output-variable", "⚠️ Isi nama dan usia dulu ya!", false);
-        return; // Hentikan fungsi jika ada input kosong
-    }
+    <h3><i class="fas fa-microchip"></i> Algoritma Sorting yang Perlu Diketahui</h3>
+    <p>Selain Bubble Sort, ada algoritma sorting yang lebih efisien untuk data besar: <strong>Quick Sort</strong> (rata-rata O(n log n)), <strong>Merge Sort</strong> (O(n log n) stabil), dan <strong>Insertion Sort</strong> (baik untuk data hampir terurut). Memilih algoritma sorting yang tepat bergantung pada ukuran data, karakteristik data, dan kebutuhan stabilitas.</p>
 
-    // Buat variabel salam dengan menggabungkan teks dan variabel nama
-    let salam = "Halo, " + nama + "!";
+    <h3><i class="fas fa-code"></i> Contoh Implementasi Singkat</h3>
+    <div class="code-snippet" style="margin-bottom:1rem;">
+        <pre>// Quick Sort (partisi)
+function quickSort(arr) {
+  if (arr.length <= 1) return arr;
+  let pivot = arr[0];
+  let left = arr.slice(1).filter(x => x <= pivot);
+  let right = arr.slice(1).filter(x => x > pivot);
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}</pre>
+    </div>
 
-    // Buat variabel tahun lahir berdasarkan tahun sekarang dikurangi usia
-    let tahunSekarang = new Date().getFullYear(); // ambil tahun saat ini
-    let tahunLahir = tahunSekarang - Number(usia); // konversi usia ke angka dulu
+    <h3><i class="fas fa-lightbulb"></i> Tips Belajar Efektif</h3>
+    <p>• Visualisasikan algoritma dengan diagram atau situs seperti <strong>VisuAlgo.net</strong>.<br>
+    • Latih soal secara rutin di platform seperti <strong>LeetCode, HackerRank, atau CodeSignal</strong>.<br>
+    • Pahami trade-off antara <strong>waktu (time complexity)</strong> dan <strong>memori (space complexity)</strong>. Tidak selalu algoritma tercepat yang terbaik jika memori terbatas.<br>
+    • Implementasikan ulang struktur data dari nol (tanpa library bawaan) untuk memperdalam pemahaman.</p>
+`;
 
-    // Susun teks hasil untuk ditampilkan
-    let hasil =
-        `📦 Isi Variabel:\n` +
-        `   nama  = "${nama}"  → tipe: ${typeof nama}\n` +
-        `   usia  = ${usia}    → tipe: ${typeof Number(usia)}\n\n` +
-        `💬 Hasil:\n` +
-        `   ${salam}\n` +
-        `   Kamu lahir sekitar tahun ${tahunLahir}.`;
-
-    // Tampilkan hasil ke kotak output
-    tampilkanOutput("output-variable", hasil, true);
+// Fungsi render, stat, navbar, dll (tidak berubah dari sebelumnya)
+function renderCards(containerId, data) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = data.map(item => `
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+            <div class="code-snippet"><pre>${escapeHtml(item.code)}</pre></div>
+        </div>
+    `).join('');
 }
 
-
-// ============================================
-// DEMO 2: ARRAY
-// Menunjukkan cara menyimpan banyak data dalam satu variabel
-// ============================================
-
-let daftarBelanja = []; // array global untuk menyimpan item belanja
-
-function tambahItem() {
-    // Ambil nilai dari input item
-    let input = document.getElementById("array-item");
-    let item = input.value.trim(); // .trim() menghapus spasi di awal/akhir
-
-    // Cek apakah input tidak kosong
-    if (item === "") {
-        tampilkanOutput("output-array", "⚠️ Tulis nama item dulu!", false);
-        return; // Hentikan jika kosong
-    }
-
-    // Tambahkan item ke dalam array dengan push()
-    daftarBelanja.push(item);
-
-    // Kosongkan input setelah item ditambahkan
-    input.value = "";
-
-    // Tampilkan isi array sekarang
-    tampilkanArray();
+function escapeHtml(str) {
+    return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m));
 }
 
-function hapusItem() {
-    // Cek apakah array tidak kosong sebelum menghapus
-    if (daftarBelanja.length === 0) {
-        tampilkanOutput("output-array", "⚠️ Tidak ada item untuk dihapus.", false);
-        return; // Hentikan jika sudah kosong
-    }
-
-    // Hapus item terakhir dari array dengan pop()
-    let itemDihapus = daftarBelanja.pop();
-
-    // Tampilkan array yang sudah diperbarui
-    tampilkanArray();
+function updateStats() {
+    document.getElementById('totalTopics').innerText = algoritmaData.length + strukturDataData.length;
+    document.getElementById('totalExamples').innerText = algoritmaData.length + strukturDataData.length;
 }
 
-function tampilkanArray() {
-    // Cek apakah array kosong
-    if (daftarBelanja.length === 0) {
-        tampilkanOutput("output-array", "Daftar belanja kosong...", false);
-        return;
-    }
-
-    // Buat teks yang menampilkan setiap item beserta indeksnya
-    let baris = `📋 daftarBelanja (${daftarBelanja.length} item):\n\n`;
-
-    // Gunakan for loop untuk menampilkan setiap item
-    for (let i = 0; i < daftarBelanja.length; i++) {
-        baris += `   [${i}] ${daftarBelanja[i]}\n`; // indeks dimulai dari 0
-    }
-
-    // Tambahkan info panjang array di bawah
-    baris += `\n📏 daftarBelanja.length = ${daftarBelanja.length}`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-array", baris, true);
+function initNavbar() {
+    const toggle = document.getElementById('mobileToggle');
+    const menu = document.getElementById('navMenu');
+    if (toggle) toggle.onclick = () => menu.classList.toggle('active');
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => menu.classList.remove('active'));
+    });
+    window.addEventListener('scroll', () => {
+        let current = '';
+        document.querySelectorAll('section').forEach(section => {
+            if (pageYOffset >= section.offsetTop - 100) current = section.id;
+        });
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+        });
+    });
 }
 
-
-// ============================================
-// DEMO 3: FUNGSI
-// Menunjukkan cara membuat dan memanggil fungsi dengan parameter
-// ============================================
-
-// Fungsi untuk menghitung luas persegi panjang
-// Parameter: panjang dan lebar (input yang diterima fungsi)
-// Return: nilai luas (output yang dikembalikan fungsi)
-function hitungLuas(panjang, lebar) {
-    let luas = panjang * lebar; // proses perkalian di dalam fungsi
-    return luas;                // kembalikan hasil ke pemanggil fungsi
+function loadSummary() {
+    document.getElementById('summaryContent').innerHTML = summaryHTML;
 }
 
-// Fungsi untuk menghitung keliling persegi panjang
-function hitungKeliling(panjang, lebar) {
-    let keliling = 2 * (panjang + lebar); // rumus keliling
-    return keliling;
-}
-
-function demoFungsi() {
-    // Ambil nilai input dan ubah ke tipe Number
-    let panjang = Number(document.getElementById("fn-panjang").value);
-    let lebar   = Number(document.getElementById("fn-lebar").value);
-
-    // Validasi: pastikan input diisi dan berupa angka positif
-    if (isNaN(panjang) || isNaN(lebar) || panjang <= 0 || lebar <= 0) {
-        tampilkanOutput("output-fungsi", "⚠️ Masukkan angka positif untuk panjang dan lebar!", false);
-        return;
-    }
-
-    // Panggil fungsi dengan argumen (nilai yang dioper ke parameter)
-    let luas      = hitungLuas(panjang, lebar);
-    let keliling  = hitungKeliling(panjang, lebar);
-
-    // Susun teks hasil
-    let hasil =
-        `🔧 Fungsi dipanggil:\n` +
-        `   hitungLuas(${panjang}, ${lebar})     → ${luas} cm²\n` +
-        `   hitungKeliling(${panjang}, ${lebar}) → ${keliling} cm\n\n` +
-        `📐 Persegi panjang ${panjang} × ${lebar}:\n` +
-        `   Luas     = ${luas} cm²\n` +
-        `   Keliling = ${keliling} cm`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-fungsi", hasil, true);
-}
-
-
-// ============================================
-// DEMO 4: TIPE DATA
-// Menunjukkan cara JavaScript menentukan tipe dari sebuah nilai
-// ============================================
-
-function demoTipeData() {
-    // Ambil teks input dari user
-    let inputTeks = document.getElementById("td-input").value;
-
-    // Cek apakah input kosong
-    if (inputTeks === "") {
-        tampilkanOutput("output-tipedata", "⚠️ Ketik sesuatu dulu ya!", false);
-        return;
-    }
-
-    // Coba konversi ke angka untuk mengecek apakah teks tersebut adalah angka
-    let cobaAngka = Number(inputTeks);
-
-    // Tentukan tipe data secara manual berdasarkan nilai inputnya
-    let tipeDeteksi;  // variabel untuk menyimpan nama tipe yang kita deteksi
-    let emoji;        // variabel untuk ikon yang sesuai tipe
-    let nilaiAsli;    // variabel untuk nilai setelah konversi yang tepat
-
-    if (inputTeks === "true" || inputTeks === "false") {
-        // Jika inputnya persis "true" atau "false" → boolean
-        tipeDeteksi = "Boolean";
-        emoji = "✅";
-        nilaiAsli = inputTeks === "true"; // konversi string ke boolean asli
-    } else if (!isNaN(cobaAngka) && inputTeks !== "") {
-        // Jika bisa dikonversi ke angka → number
-        if (inputTeks.includes(".")) {
-            // Jika ada titik desimal → float
-            tipeDeteksi = "Number (Float / Desimal)";
-        } else {
-            // Jika tidak ada titik → integer
-            tipeDeteksi = "Number (Integer / Angka Bulat)";
-        }
-        emoji = "🔢";
-        nilaiAsli = cobaAngka;
-    } else {
-        // Selain itu → string (teks)
-        tipeDeteksi = "String (Teks)";
-        emoji = "📝";
-        nilaiAsli = inputTeks;
-    }
-
-    // Gunakan typeof untuk mendapat nama tipe dari JavaScript
-    let tipePrimitive = typeof nilaiAsli; // hasilnya: "string", "number", atau "boolean"
-
-    // Susun teks hasil
-    let hasil =
-        `${emoji} Input: "${inputTeks}"\n\n` +
-        `📌 Tipe Terdeteksi : ${tipeDeteksi}\n` +
-        `🔍 typeof          : "${tipePrimitive}"\n\n` +
-        `💡 Tipe data umum:\n` +
-        `   "Teks"  → string\n` +
-        `   42      → number (integer)\n` +
-        `   3.14    → number (float)\n` +
-        `   true    → boolean`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-tipedata", hasil, true);
-}
-
-
-// ============================================
-// DEMO 5: PERCABANGAN
-// Menunjukkan cara program mengambil keputusan dengan if-else
-// ============================================
-
-function demoPercabangan() {
-    // Ambil nilai dari input dan ubah ke angka
-    let nilai = Number(document.getElementById("pc-nilai").value);
-
-    // Validasi: pastikan nilai antara 0 sampai 100
-    if (isNaN(nilai) || nilai < 0 || nilai > 100) {
-        tampilkanOutput("output-percabangan", "⚠️ Masukkan angka antara 0 sampai 100!", false);
-        return;
-    }
-
-    // Percabangan untuk menentukan grade berdasarkan nilai
-    let grade;   // variabel untuk menyimpan hasil kondisi
-    let emoji;   // variabel untuk ikon sesuai kondisi
-
-    if (nilai >= 90) {
-        // Kondisi pertama: nilai 90 ke atas
-        grade = "A - Sangat Baik 🌟";
-        emoji = "🎉";
-    } else if (nilai >= 75) {
-        // Kondisi kedua: nilai 75 sampai 89
-        grade = "B - Baik 👍";
-        emoji = "😊";
-    } else if (nilai >= 60) {
-        // Kondisi ketiga: nilai 60 sampai 74
-        grade = "C - Cukup";
-        emoji = "😐";
-    } else if (nilai >= 40) {
-        // Kondisi keempat: nilai 40 sampai 59
-        grade = "D - Kurang";
-        emoji = "😕";
-    } else {
-        // Kondisi terakhir (else): nilai di bawah 40
-        grade = "E - Perlu Belajar Lebih Keras";
-        emoji = "📚";
-    }
-
-    // Susun teks hasil
-    let hasil =
-        `${emoji} Nilai: ${nilai}\n\n` +
-        `📋 Proses Percabangan:\n` +
-        `   if (${nilai} >= 90)  → ${nilai >= 90 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   if (${nilai} >= 75)  → ${nilai >= 75 && nilai < 90 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   if (${nilai} >= 60)  → ${nilai >= 60 && nilai < 75 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   if (${nilai} >= 40)  → ${nilai >= 40 && nilai < 60 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   else              → ${nilai < 40 ? "✅ TERPENUHI" : "❌ tidak"}\n\n` +
-        `🏆 Grade: ${grade}`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-percabangan", hasil, true);
-}
-
-
-// ============================================
-// DEMO 6: PERULANGAN
-// Menunjukkan cara for loop mengeksekusi kode berulang kali
-// ============================================
-
-function demoPerulangan() {
-    // Ambil jumlah bintang dari input dan ubah ke angka
-    let jumlah = Number(document.getElementById("loop-n").value);
-
-    // Validasi: pastikan angka antara 1 sampai 20
-    if (isNaN(jumlah) || jumlah < 1 || jumlah > 20) {
-        tampilkanOutput("output-perulangan", "⚠️ Masukkan angka antara 1 sampai 20!", false);
-        return;
-    }
-
-    // Variabel untuk menampung semua bintang
-    let baris = "";
-
-    // For loop: jalankan blok kode sebanyak 'jumlah' kali
-    // i dimulai dari 1, loop berjalan selama i <= jumlah, i bertambah 1 setiap putaran
-    for (let i = 1; i <= jumlah; i++) {
-        baris += "⭐"; // tambahkan satu bintang setiap putaran
-    }
-
-    // Susun teks penjelasan proses loop
-    let hasil =
-        `🔄 for (let i = 1; i <= ${jumlah}; i++)\n\n` +
-        `📊 Proses:\n`;
-
-    // Tampilkan log setiap iterasi (maksimal 5 baris agar tidak terlalu panjang)
-    let batasLog = Math.min(jumlah, 5); // tampilkan maksimal 5 iterasi
-    for (let i = 1; i <= batasLog; i++) {
-        hasil += `   Putaran ke-${i}: tambah ⭐\n`; // log setiap putaran
-    }
-
-    // Jika iterasi lebih dari 5, tambahkan keterangan
-    if (jumlah > 5) {
-        hasil += `   ... (${jumlah - 5} putaran lainnya)\n`;
-    }
-
-    // Tambahkan hasil akhir bintang
-    hasil += `\n⭐ Hasil (${jumlah} bintang):\n   ${baris}`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-perulangan", hasil, true);
-}
-
-
-// ============================================
-// FUNGSI PEMBANTU (Helper)
-// Fungsi yang digunakan oleh semua demo di atas
-// ============================================
-
-// Fungsi untuk menampilkan teks ke kotak output
-// Parameter:
-//   id      → id elemen output yang dituju
-//   pesan   → teks yang akan ditampilkan
-//   berhasil → true = teks terang (aktif), false = teks redup (peringatan)
-function tampilkanOutput(id, pesan, berhasil) {
-    // Ambil elemen output berdasarkan id
-    let elOutput = document.getElementById(id);
-
-    // Isi teks outputnya
-    elOutput.textContent = pesan;
-
-    // Tambah atau hapus kelas 'aktif' untuk mengubah warna teks
-    if (berhasil) {
-        elOutput.classList.add("aktif");    // teks jadi terang
-    } else {
-        elOutput.classList.remove("aktif"); // teks tetap redup
-    }
-}
+document.addEventListener('DOMContentLoaded', () => {
+    renderCards('algoritmaGrid', algoritmaData);
+    renderCards('strukturDataGrid', strukturDataData);
+    updateStats();
+    loadSummary();
+    initNavbar();
+});
