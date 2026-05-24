@@ -50,28 +50,42 @@
             </div>
 
             <!-- === CONTOH 1: VARIABEL === -->
-            <div class="contoh-card">
+            <div class="contoh-card" id="demo-variable">
                 <div class="contoh-header">
                     <span class="contoh-badge badge-merah">Variable</span>
                     <h3>Simpan & Tampilkan Nilai</h3>
                 </div>
                 <div class="contoh-body">
+                    <!-- Blok kode yang ditampilkan -->
+                    <div class="code-block">
+                        <pre><span class="c-kw">let</span> nama  = <span class="c-str">"..."</span>   <span class="c-cm">// variabel menyimpan teks</span>
+<span class="c-kw">let</span> usia  = <span class="c-num">0</span>       <span class="c-cm">// variabel menyimpan angka</span>
+<span class="c-kw">let</span> salam = <span class="c-str">"Halo, "</span> + nama + <span class="c-str">"!"</span></pre>
+                    </div>
+                    <!-- Input dari user -->
                     <div class="contoh-input-group">
                         <input type="text" id="var-nama" placeholder="Masukkan namamu..." class="contoh-input" />
                         <input type="number" id="var-usia" placeholder="Usia kamu..." class="contoh-input" />
                         <button onclick="demoVariable()" class="contoh-btn btn-merah">Jalankan ▶</button>
                     </div>
+                    <!-- Hasil output -->
                     <div class="contoh-output" id="output-variable">Output akan muncul di sini...</div>
                 </div>
             </div>
 
             <!-- === CONTOH 2: ARRAY === -->
-            <div class="contoh-card">
+            <div class="contoh-card" id="demo-array">
                 <div class="contoh-header">
                     <span class="contoh-badge badge-kuning">Array</span>
                     <h3>Daftar Belanja</h3>
                 </div>
                 <div class="contoh-body">
+                    <div class="code-block">
+                        <pre><span class="c-kw">let</span> belanja = []         <span class="c-cm">// array kosong</span>
+belanja.<span class="c-fn">push</span>(<span class="c-str">"item"</span>)      <span class="c-cm">// tambah item ke array</span>
+belanja[<span class="c-num">0</span>]               <span class="c-cm">// akses item pertama (indeks 0)</span>
+belanja.<span class="c-fn">length</span>           <span class="c-cm">// jumlah item dalam array</span></pre>
+                    </div>
                     <div class="contoh-input-group">
                         <input type="text" id="array-item" placeholder="Tambah item belanja..." class="contoh-input" />
                         <button onclick="tambahItem()" class="contoh-btn btn-kuning">Tambah +</button>
@@ -82,12 +96,19 @@
             </div>
 
             <!-- === CONTOH 3: FUNGSI === -->
-            <div class="contoh-card">
+            <div class="contoh-card" id="demo-fungsi">
                 <div class="contoh-header">
                     <span class="contoh-badge badge-hijau">Fungsi</span>
                     <h3>Kalkulator Luas</h3>
                 </div>
                 <div class="contoh-body">
+                    <div class="code-block">
+                        <pre><span class="c-cm">// fungsi menerima parameter & mengembalikan nilai</span>
+<span class="c-kw">function</span> <span class="c-fn">hitungLuas</span>(panjang, lebar) {
+    <span class="c-kw">let</span> luas = panjang * lebar  <span class="c-cm">// proses di dalam fungsi</span>
+    <span class="c-kw">return</span> luas                 <span class="c-cm">// nilai yang dikembalikan</span>
+}</pre>
+                    </div>
                     <div class="contoh-input-group">
                         <input type="number" id="fn-panjang" placeholder="Panjang (cm)" class="contoh-input" />
                         <input type="number" id="fn-lebar" placeholder="Lebar (cm)" class="contoh-input" />
@@ -98,12 +119,18 @@
             </div>
 
             <!-- === CONTOH 4: TIPE DATA === -->
-            <div class="contoh-card">
+            <div class="contoh-card" id="demo-tipedata">
                 <div class="contoh-header">
                     <span class="contoh-badge badge-merah">Tipe Data</span>
                     <h3>Deteksi Tipe Data</h3>
                 </div>
                 <div class="contoh-body">
+                    <div class="code-block">
+                        <pre><span class="c-kw">typeof</span> <span class="c-str">"Halo"</span>     <span class="c-cm">// → "string"</span>
+<span class="c-kw">typeof</span> <span class="c-num">42</span>         <span class="c-cm">// → "number"</span>
+<span class="c-kw">typeof</span> <span class="c-num">3.14</span>       <span class="c-cm">// → "number" (float)</span>
+<span class="c-kw">typeof</span> <span class="c-kw">true</span>       <span class="c-cm">// → "boolean"</span></pre>
+                    </div>
                     <div class="contoh-input-group">
                         <input type="text" id="td-input" placeholder="Ketik nilai apa saja..." class="contoh-input" />
                         <button onclick="demoTipeData()" class="contoh-btn btn-merah">Cek Tipe ▶</button>
@@ -113,12 +140,24 @@
             </div>
 
             <!-- === CONTOH 5: PERCABANGAN === -->
-            <div class="contoh-card">
+            <div class="contoh-card" id="demo-percabangan">
                 <div class="contoh-header">
                     <span class="contoh-badge badge-kuning">Percabangan</span>
                     <h3>Cek Nilai Ujian</h3>
                 </div>
                 <div class="contoh-body">
+                    <div class="code-block">
+                        <pre><span class="c-kw">if</span> (nilai >= <span class="c-num">90</span>) {
+    <span class="c-cm">// kondisi 1: nilai sangat bagus</span>
+    hasil = <span class="c-str">"A - Sangat Baik"</span>
+} <span class="c-kw">else if</span> (nilai >= <span class="c-num">75</span>) {
+    <span class="c-cm">// kondisi 2: nilai cukup bagus</span>
+    hasil = <span class="c-str">"B - Baik"</span>
+} <span class="c-kw">else</span> {
+    <span class="c-cm">// kondisi tidak ada yang terpenuhi</span>
+    hasil = <span class="c-str">"C - Perlu Belajar Lagi"</span>
+}</pre>
+                    </div>
                     <div class="contoh-input-group">
                         <input type="number" id="pc-nilai" placeholder="Masukkan nilai (0-100)" class="contoh-input" min="0" max="100" />
                         <button onclick="demoPercabangan()" class="contoh-btn btn-kuning">Cek ▶</button>
@@ -128,12 +167,18 @@
             </div>
 
             <!-- === CONTOH 6: PERULANGAN === -->
-            <div class="contoh-card">
+            <div class="contoh-card" id="demo-perulangan">
                 <div class="contoh-header">
                     <span class="contoh-badge badge-hijau">Perulangan</span>
                     <h3>Cetak Bintang</h3>
                 </div>
                 <div class="contoh-body">
+                    <div class="code-block">
+                        <pre><span class="c-cm">// for loop: ulangi sebanyak n kali</span>
+<span class="c-kw">for</span> (<span class="c-kw">let</span> i = <span class="c-num">1</span>; i <= jumlah; i++) {
+    baris += <span class="c-str">"⭐"</span>  <span class="c-cm">// tambah bintang setiap putaran</span>
+}</pre>
+                    </div>
                     <div class="contoh-input-group">
                         <input type="number" id="loop-n" placeholder="Jumlah bintang (1-20)" class="contoh-input" min="1" max="20" />
                         <button onclick="demoPerulangan()" class="contoh-btn btn-hijau">Cetak ▶</button>
@@ -142,8 +187,9 @@
                 </div>
             </div>
 
-        </div>
+        </div><!-- akhir con-contoh -->
 
+        <!-- Muat file JavaScript -->
         <script src="script.js"></script>
     </body>
 </html>
