@@ -1,10 +1,9 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/*warna yang dipake, jadi setap panggil pake var(--nama yang ada disini)*/
 :root {
     --bg: #0f0e17;
     --surface: #1a1830;
@@ -27,8 +26,7 @@ body {
         radial-gradient(ellipse at 80% 80%, rgba(107, 203, 119, 0.07) 0%, transparent 50%);
 }
 
-/* wadah buat judul biar ukuran sama posisi konten yang ada di judul bisa ngikutin ukuran layar*/
-#con-judul{
+#con-judul {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,27 +36,21 @@ body {
     padding: 20px;
 }
 
-/* biar posisi teks lurus ke-tengah*/
 #judul {
     text-align: center;
 }
 
-/*buat bagian judul h1*/
 #judul h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     letter-spacing: -0.02em;
     font-weight: 700;
-    /* warna belakang teks buat masking*/
     background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcb77 100%);
-    /*pilih area yang dimask*/
     background-clip: text;
     -webkit-background-clip: text;
-    /*ngubah warna teks jadi transparan biar warna yang dibelakang muncul*/
     color: transparent;
     margin-bottom: 14px;
 }
 
-/*buat bagian judul p*/
 #judul p {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: var(--text-secondary);
@@ -66,9 +58,8 @@ body {
     line-height: 1.6;
 }
 
-/* wadah buat topik, fungsinya sama kaya wadah judul */
-#con-topik{
-    display:flex;
+#con-topik {
+    display: flex;
     align-items: stretch;
     justify-content: center;
     min-height: 500px;
@@ -79,8 +70,7 @@ body {
     margin: 0 auto;
 }
 
-/* blok topiknya */
-.topik{
+.topik {
     text-align: left;
     background: var(--card);
     border: 1px solid var(--border);
@@ -91,93 +81,81 @@ body {
     transition: all 0.3s ease;
 }
 
-/*Efek hover*/
 .topik:hover {
     transform: translateY(-5px);
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/*judul topik*/
-.topik h3{
+.topik h3 {
     font-size: 1.25rem;
     text-transform: capitalize;
     margin-bottom: 12px;
 }
 
-/*deskripsi topik*/
 .topik p {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.5;
 }
 
-/*buat ganti warna judul topik*/
-.topik:nth-child(1) h3, .topik:nth-child(4) h3 { color: var(--accent); } /*topik pertama warnanya ini*/
-.topik:nth-child(2) h3, .topik:nth-child(5) h3 { color: var(--accent2); } /*topik kedua warnanya ini*/
-.topik:nth-child(3) h3, .topik:nth-child(6) h3 { color: var(--accent3); } /*topik ketiga warnanya ini*/
+.topik:nth-child(1) h3, .topik:nth-child(4) h3 { color: var(--accent); }
+.topik:nth-child(2) h3, .topik:nth-child(5) h3 { color: var(--accent2); }
+.topik:nth-child(3) h3, .topik:nth-child(6) h3 { color: var(--accent3); }
 
 
 /* ============================================
    BAGIAN CONTOH INTERAKTIF
    ============================================ */
 
-/* wadah utama seluruh contoh interaktif */
 #con-contoh {
-    max-width: 1200px;       /* batas lebar maksimal */
-    margin: 0 auto;          /* tengahkan secara horizontal */
-    padding: 20px 20px 60px; /* jarak dalam atas, samping, bawah */
-    border-top: 1px solid var(--border); /* garis pemisah dari bagian topik */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+    border-top: 1px solid var(--border);
 }
 
-/* judul bagian contoh interaktif */
 #judul-contoh {
-    text-align: center;      /* teks di tengah */
-    padding: 40px 20px 30px; /* jarak dalam */
+    text-align: center;
+    padding: 40px 20px 30px;
 }
 
-/* h2 di judul contoh */
 #judul-contoh h2 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem); /* ukuran font responsif */
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcb77 100%); /* gradasi sama seperti judul utama */
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcb77 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     margin-bottom: 10px;
 }
 
-/* paragraf di bawah h2 judul contoh */
 #judul-contoh p {
     color: var(--text-secondary);
     font-size: 1rem;
 }
 
-/* kartu setiap contoh interaktif */
 .contoh-card {
-    background: var(--card);              /* warna latar kartu */
-    border: 1px solid var(--border);     /* garis tepi tipis */
-    border-radius: 15px;                 /* sudut membulat */
-    margin-bottom: 24px;                 /* jarak antar kartu */
-    overflow: hidden;                    /* sembunyikan konten yang melebihi batas */
-    transition: box-shadow 0.3s ease;    /* animasi bayangan saat hover */
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
 }
 
-/* efek hover pada kartu contoh */
 .contoh-card:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* tambah bayangan */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* bagian atas kartu (judul & badge) */
 .contoh-header {
-    display: flex;                       /* susun badge dan judul berdampingan */
-    align-items: center;                 /* rata tengah secara vertikal */
-    gap: 12px;                           /* jarak antara badge dan judul */
-    padding: 18px 25px;                  /* jarak dalam */
-    border-bottom: 1px solid var(--border); /* garis pemisah ke bagian body */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 25px;
+    border-bottom: 1px solid var(--border);
 }
 
-/* judul di header kartu */
 .contoh-header h3 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -185,166 +163,86 @@ body {
     text-transform: capitalize;
 }
 
-/* badge label nama topik */
 .contoh-badge {
-    font-size: 0.7rem;          /* ukuran teks kecil */
+    font-size: 0.7rem;
     font-weight: 700;
-    text-transform: uppercase;  /* huruf kapital semua */
+    text-transform: uppercase;
     letter-spacing: 0.08em;
-    padding: 4px 10px;          /* jarak dalam badge */
-    border-radius: 20px;        /* bentuk pill */
+    padding: 4px 10px;
+    border-radius: 20px;
 }
 
-/* warna badge merah (variable, tipe data) */
-.badge-merah {
-    background: rgba(255, 107, 107, 0.15); /* latar transparan merah */
-    color: var(--accent);                  /* teks merah */
-    border: 1px solid rgba(255, 107, 107, 0.3);
-}
+.badge-merah  { background: rgba(255,107,107,0.15); color: var(--accent);  border: 1px solid rgba(255,107,107,0.3); }
+.badge-kuning { background: rgba(255,217,61,0.15);  color: var(--accent2); border: 1px solid rgba(255,217,61,0.3); }
+.badge-hijau  { background: rgba(107,203,119,0.15); color: var(--accent3); border: 1px solid rgba(107,203,119,0.3); }
 
-/* warna badge kuning (array, percabangan) */
-.badge-kuning {
-    background: rgba(255, 217, 61, 0.15);
-    color: var(--accent2);
-    border: 1px solid rgba(255, 217, 61, 0.3);
-}
-
-/* warna badge hijau (fungsi, perulangan) */
-.badge-hijau {
-    background: rgba(107, 203, 119, 0.15);
-    color: var(--accent3);
-    border: 1px solid rgba(107, 203, 119, 0.3);
-}
-
-/* bagian body kartu (kode + input + output) */
 .contoh-body {
-    padding: 20px 25px; /* jarak dalam */
+    padding: 20px 25px;
     display: flex;
-    flex-direction: column; /* susun secara vertikal */
-    gap: 16px;              /* jarak antar elemen */
+    flex-direction: column;
+    gap: 16px;
 }
 
-/* blok tampilan kode */
-.code-block {
-    background: rgba(0, 0, 0, 0.35);    /* latar gelap */
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    overflow-x: auto;                   /* scroll horizontal jika kode panjang */
-}
-
-/* teks kode di dalam blok */
-.code-block pre {
-    font-family: 'Courier New', Courier, monospace; /* font monospace */
-    font-size: 0.85rem;
-    line-height: 1.7;
-    color: var(--text-primary);
-    white-space: pre;                   /* jaga spasi dan enter asli */
-}
-
-/* warna syntax highlighting: keyword (let, if, for, dll) */
-.c-kw { color: #c792ea; }
-/* warna syntax highlighting: string ("teks") */
-.c-str { color: #c3e88d; }
-/* warna syntax highlighting: angka */
-.c-num { color: #f78c6c; }
-/* warna syntax highlighting: nama fungsi */
-.c-fn  { color: #82aaff; }
-/* warna syntax highlighting: komentar */
-.c-cm  { color: #546e7a; font-style: italic; }
-
-/* grup input dan tombol */
 .contoh-input-group {
-    display: flex;      /* susun berdampingan */
-    flex-wrap: wrap;    /* pindah ke baris baru jika tidak muat */
-    gap: 10px;          /* jarak antar elemen */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     align-items: center;
 }
 
-/* input teks / angka */
 .contoh-input {
-    flex: 1;                         /* ambil sisa ruang yang ada */
-    min-width: 160px;               /* lebar minimal */
+    flex: 1;
+    min-width: 160px;
     padding: 10px 14px;
-    background: rgba(255,255,255,0.05); /* latar transparan */
+    background: rgba(255,255,255,0.05);
     border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--text-primary);
+    font-family: sans-serif;   /* sama dengan font body */
     font-size: 0.9rem;
     outline: none;
     transition: border-color 0.2s;
 }
 
-/* efek focus pada input */
 .contoh-input:focus {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* style dasar tombol */
 .contoh-btn {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
+    font-family: sans-serif;   /* sama dengan font body */
     font-size: 0.9rem;
     font-weight: 600;
-    cursor: pointer;             /* kursor jadi pointer saat hover */
+    cursor: pointer;
     transition: all 0.2s ease;
-    white-space: nowrap;        /* teks tidak dibungkus */
+    white-space: nowrap;
 }
 
-/* efek hover tombol: sedikit naik */
-.contoh-btn:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1); /* sedikit lebih terang */
-}
+.contoh-btn:hover  { transform: translateY(-2px); filter: brightness(1.1); }
+.contoh-btn:active { transform: translateY(0); }
 
-/* efek saat tombol diklik */
-.contoh-btn:active {
-    transform: translateY(0);
-}
+.btn-merah   { background: var(--accent);  color: #0f0e17; }
+.btn-kuning  { background: var(--accent2); color: #0f0e17; }
+.btn-hijau   { background: var(--accent3); color: #0f0e17; }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
 
-/* tombol merah */
-.btn-merah {
-    background: var(--accent);
-    color: #0f0e17;
-}
-
-/* tombol kuning */
-.btn-kuning {
-    background: var(--accent2);
-    color: #0f0e17;
-}
-
-/* tombol hijau */
-.btn-hijau {
-    background: var(--accent3);
-    color: #0f0e17;
-}
-
-/* tombol outline (transparan dengan border) */
-.btn-outline {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-}
-
-/* kotak output hasil */
 .contoh-output {
-    background: rgba(0, 0, 0, 0.25);    /* latar gelap */
+    background: rgba(0, 0, 0, 0.25);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 14px 18px;
-    font-family: 'Courier New', Courier, monospace; /* font monospace */
+    font-family: sans-serif;   /* sama dengan font body */
     font-size: 0.9rem;
     color: var(--text-secondary);
-    min-height: 50px;                   /* tinggi minimal agar tidak terlalu kecil */
+    min-height: 50px;
     line-height: 1.6;
-    transition: color 0.3s;             /* animasi perubahan warna teks */
-    white-space: pre-wrap;             /* jaga format tapi tetap wrap */
+    transition: color 0.3s;
+    white-space: pre-wrap;
     word-break: break-word;
 }
 
-/* warna teks output saat ada hasil */
 .contoh-output.aktif {
     color: var(--text-primary);
 }
