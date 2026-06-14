@@ -1,350 +1,226 @@
-// ============================================
-// script.js - Logika Contoh Interaktif
-// Pemrograman Dasar
-// ============================================
+/* ============================================================
+   script.js — Logika Komputasi dan Animasi Interaktif 
+   Website "Sinau Pemrograman Dasar"
+   ============================================================ */
 
 
-// ============================================
-// DEMO 1: VARIABEL
-// Menunjukkan cara menyimpan dan menggunakan variabel
-// ============================================
+/* === 1. LOGIKA MENU NAVIGASI HP (HAMBURGER MENU) === */
+// Mengambil tombol garis 3 (hamburger) dan daftar menu (nav-links) dari HTML
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
 
-function demoVariable() {
-    // Ambil nilai dari input nama dan usia
-    let nama = document.getElementById("var-nama").value;
-    let usia = document.getElementById("var-usia").value;
+// Fungsi ini akan aktif saat tombol hamburger diklik di layar sentuh
+hamburger.addEventListener('click', () => {
+    // '.toggle' bekerja seperti saklar lampu.
+    // Jika kelas 'active' belum ada, tambahkan. Jika sudah ada, hapus.
+    // Di CSS, class 'active' ini bertugas menjatuhkan/memunculkan dropdown menu.
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+});
 
-    // Cek apakah kedua input sudah diisi
-    if (nama === "" || usia === "") {
-        tampilkanOutput("output-variable", "⚠️ Isi nama dan usia dulu ya!", false);
-        return; // Hentikan fungsi jika ada input kosong
-    }
-
-    // Buat variabel salam dengan menggabungkan teks dan variabel nama
-    let salam = "Halo, " + nama + "!";
-
-    // Buat variabel tahun lahir berdasarkan tahun sekarang dikurangi usia
-    let tahunSekarang = new Date().getFullYear(); // ambil tahun saat ini
-    let tahunLahir = tahunSekarang - Number(usia); // konversi usia ke angka dulu
-
-    // Susun teks hasil untuk ditampilkan
-    let hasil =
-        `📦 Isi Variabel:\n` +
-        `   nama  = "${nama}"  → tipe: ${typeof nama}\n` +
-        `   usia  = ${usia}    → tipe: ${typeof Number(usia)}\n\n` +
-        `💬 Hasil:\n` +
-        `   ${salam}\n` +
-        `   Kamu lahir sekitar tahun ${tahunLahir}.`;
-
-    // Tampilkan hasil ke kotak output
-    tampilkanOutput("output-variable", hasil, true);
+// Fungsi ini digunakan saat pengguna sudah memilih salah satu menu (Misal: klik "Variabel")
+function closeMenu() {
+    // Kita memaksa membuang class 'active' agar menu menggulung/menutup kembali secara otomatis
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
 }
 
 
-// ============================================
-// DEMO 2: ARRAY
-// Menunjukkan cara menyimpan banyak data dalam satu variabel
-// ============================================
+/* === 2. LOGIKA ANIMASI TUMPUKAN LOGO (HERO SECTION) === */
+// Z-Index menentukan elemen mana yang berada di posisi paling depan menimpa yang lain.
+let maxZIndex = 10; 
 
-let daftarBelanja = []; // array global untuk menyimpan item belanja
+// Mencari semua logo di layar (yang memiliki nama class '.lang-card')
+document.querySelectorAll('.lang-card').forEach(card => {
+    
+    // Memberikan perintah: Apa yang harus dilakukan jika logo ini diklik?
+    card.addEventListener('click', () => {
+        
+        // 1. Naikkan nilai Z-Index agar logo ini berada di atas logo yang lain
+        maxZIndex++;
+        card.style.zIndex = maxZIndex;
+        
+        // 2. Hentikan sementara animasi mengambang/naik-turun dari CSS
+        card.style.animationPlayState = 'paused';
+        
+        // 3. Efek Visual: Perbesar sedikit (scale) dan berikan bayangan tebal seolah ia maju/timbul
+        card.style.transform = `scale(1.15)`;
+        card.style.boxShadow = "0 25px 50px rgba(0,0,0,0.3)"; 
+        
+        // 4. Atur timer mundur. Setelah 350 milidetik (0.35 detik), kembalikan wujud aslinya
+        setTimeout(() => {
+            card.style.transform = `scale(1) rotate(0deg)`; // Reset ukuran ke normal
+            card.style.boxShadow = "0 15px 30px rgba(0,0,0,0.15)"; // Kembalikan bayangan tipis
+            card.style.animationPlayState = 'running'; // Mulai kembali animasi mengambang
+        }, 350);
+    });
+});
 
-function tambahItem() {
-    // Ambil nilai dari input item
-    let input = document.getElementById("array-item");
-    let item = input.value.trim(); // .trim() menghapus spasi di awal/akhir
 
-    // Cek apakah input tidak kosong
-    if (item === "") {
-        tampilkanOutput("output-array", "⚠️ Tulis nama item dulu!", false);
-        return; // Hentikan jika kosong
+/* === 3. LOGIKA LAB 1: DETEKTOR TIPE DATA === */
+// Mengambil elemen kolom ketikan dan kotak hasil
+const typeInput = document.getElementById('type-input');
+const typeResult = document.getElementById('type-result');
+
+// 'input' event artinya kode ini akan tereksekusi SECARA LANGSUNG setiap kali pengguna menekan tombol di keyboard
+typeInput.addEventListener('input', function() {
+    
+    // .trim() berfungsi membuang kelebihan spasi di awal dan akhir teks
+    const val = this.value.trim();
+    
+    // Jika input dihapus/kosong, reset teksnya
+    if (val === '') { 
+        typeResult.innerHTML = 'Sistem standby. Menunggu masukan data ke memori...'; 
+        return; 
     }
 
-    // Tambahkan item ke dalam array dengan push()
-    daftarBelanja.push(item);
-
-    // Kosongkan input setelah item ditambahkan
-    input.value = "";
-
-    // Tampilkan isi array sekarang
-    tampilkanArray();
-}
-
-function hapusItem() {
-    // Cek apakah array tidak kosong sebelum menghapus
-    if (daftarBelanja.length === 0) {
-        tampilkanOutput("output-array", "⚠️ Tidak ada item untuk dihapus.", false);
-        return; // Hentikan jika sudah kosong
+    let tipe; // Wadah untuk menampung tebakan mesin
+    
+    // Logika Percabangan Pendeteksi:
+    // 1. Cek apakah itu nilai boolean mutlak ("true" atau "false")
+    if (val.toLowerCase() === 'true' || val.toLowerCase() === 'false') {
+        tipe = 'bool (Logika Biner 1 / 0)'; 
+    } 
+    // 2. Cek apakah itu murni angka (isNaN = is Not a Number). Jika bukan bukan angka (berarti angka), masuk kesini
+    else if (!isNaN(val) && val !== '') {
+        // Cek lagi, apakah di dalam angka itu ada titik (pecahan)?
+        tipe = val.includes('.') ? 'float (Angka Pecahan)' : 'int (Angka Bulat)';
+    } 
+    // 3. Jika bukan true/false, dan bukan angka, maka itu pasti teks biasa.
+    else {
+        tipe = 'string (Untaian Teks)'; 
     }
 
-    // Hapus item terakhir dari array dengan pop()
-    let itemDihapus = daftarBelanja.pop();
+    // Ubah tulisan yang ada di dalam kotak hasil
+    typeResult.innerHTML = 
+        `Data Masuk: "${val}"<br><br>` +
+        `> Deklarasi Tipe Data C++ : <strong style="color:var(--putih-murni)">${tipe}</strong>`;
+});
 
-    // Tampilkan array yang sudah diperbarui
-    tampilkanArray();
-}
 
-function tampilkanArray() {
-    // Cek apakah array kosong
-    if (daftarBelanja.length === 0) {
-        tampilkanOutput("output-array", "Daftar belanja kosong...", false);
-        return;
+/* === 4. LOGIKA LAB 2: MESIN KALKULATOR (OPERATOR) === */
+// Fungsi ini dipanggil hanya ketika tombol "Eksekusi CPU" ditekan
+function calculate() {
+    // Ambil angka dari input, ubah menjadi tipe data Number (Float)
+    const num1 = parseFloat(document.getElementById('calc-num1').value);
+    const num2 = parseFloat(document.getElementById('calc-num2').value);
+    const op = document.getElementById('calc-op').value; // Mengambil tanda tambah, kurang, dll
+    const res = document.getElementById('calc-result'); // Wadah layar hitam
+
+    // Keamanan: Jika ada form yang tidak diisi, gagalkan proses
+    if (isNaN(num1) || isNaN(num2)) { 
+        res.innerHTML = "[ERROR SYSTEM]: Input bukan angka valid."; 
+        return; 
     }
 
-    // Buat teks yang menampilkan setiap item beserta indeksnya
-    let baris = `📋 daftarBelanja (${daftarBelanja.length} item):\n\n`;
+    let hasil;
+    
+    // ==== BAGIAN 1: PROSES ARITMATIKA (Hitung Matematika) ====
+    if (op === '+') hasil = num1 + num2;
+    else if (op === '-') hasil = num1 - num2;
+    else if (op === '*') hasil = num1 * num2;
+    else if (op === '/') hasil = num2 !== 0 ? (num1 / num2).toFixed(2) : "[FAIL]: Mustahil membagi dengan Nol!";
+    else if (op === '%') hasil = num2 !== 0 ? num1 % num2 : "[FAIL]: Modulo nol tidak terdefinisi!";
 
-    // Gunakan for loop untuk menampilkan setiap item
-    for (let i = 0; i < daftarBelanja.length; i++) {
-        baris += `   [${i}] ${daftarBelanja[i]}\n`; // indeks dimulai dari 0
-    }
+    // ==== BAGIAN 2: PROSES PERBANDINGAN (Tanya Jawab Logika) ====
+    // Gunakan Operator Ternary (Percabangan Singkat Sebaris)
+    // Jika num1 lebih besar, hasilkan "Benar", jika salah hasilkan "Salah"
+    let lebihBesar = (num1 > num2) ? "Benar (true / 1)" : "Salah (false / 0)";
+    
+    // Pengecekan === (Sama Persis)
+    let samaDengan = (num1 === num2) ? "Benar (true / 1)" : "Salah (false / 0)";
 
-    // Tambahkan info panjang array di bawah
-    baris += `\n📏 daftarBelanja.length = ${daftarBelanja.length}`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-array", baris, true);
+    // ==== BAGIAN 3: MENCETAK KE LAYAR ====
+    res.innerHTML = `<strong>1. EKSEKUSI ARITMATIKA</strong><br>` +
+                    `> Instruksi ALU: [ ${num1} ] ${op} [ ${num2} ]<br>` +
+                    `> Hasil Kalkulasi : <strong style="color:var(--putih-murni); font-size:1.2rem;">${hasil}</strong><br><br>` +
+                    `<strong>2. EVALUASI PERBANDINGAN</strong><br>` +
+                    `> Apakah ${num1} > ${num2}? <strong>${lebihBesar}</strong><br>` +
+                    `> Apakah ${num1} == ${num2}? <strong>${samaDengan}</strong>`;
 }
 
 
-// ============================================
-// DEMO 3: FUNGSI
-// Menunjukkan cara membuat dan memanggil fungsi dengan parameter
-// ============================================
+/* === 5. LOGIKA LAB 3: PENGKONDISIAN/PERCABANGAN === */
+// Fungsi simulasi sensor cerdas If-Else
+function checkSuhu() {
+    const input = document.getElementById('suhu-input').value;
+    const res = document.getElementById('suhu-result');
+    
+    // Tolak jika input kosong
+    if(input === '') { res.innerHTML = "[WARN]: Masukkan nilai angka sensor."; return; }
 
-// Fungsi untuk menghitung luas persegi panjang
-// Parameter: panjang dan lebar (input yang diterima fungsi)
-// Return: nilai luas (output yang dikembalikan fungsi)
-function hitungLuas(panjang, lebar) {
-    let luas = panjang * lebar; // proses perkalian di dalam fungsi
-    return luas;                // kembalikan hasil ke pemanggil fungsi
-}
+    const suhu = Number(input); // Jadikan tipe datanya sebagai angka
+    let wujud = ''; // Variabel kosong untuk menampung bentuk air
 
-// Fungsi untuk menghitung keliling persegi panjang
-function hitungKeliling(panjang, lebar) {
-    let keliling = 2 * (panjang + lebar); // rumus keliling
-    return keliling;
-}
-
-function demoFungsi() {
-    // Ambil nilai input dan ubah ke tipe Number
-    let panjang = Number(document.getElementById("fn-panjang").value);
-    let lebar   = Number(document.getElementById("fn-lebar").value);
-
-    // Validasi: pastikan input diisi dan berupa angka positif
-    if (isNaN(panjang) || isNaN(lebar) || panjang <= 0 || lebar <= 0) {
-        tampilkanOutput("output-fungsi", "⚠️ Masukkan angka positif untuk panjang dan lebar!", false);
-        return;
-    }
-
-    // Panggil fungsi dengan argumen (nilai yang dioper ke parameter)
-    let luas      = hitungLuas(panjang, lebar);
-    let keliling  = hitungKeliling(panjang, lebar);
-
-    // Susun teks hasil
-    let hasil =
-        `🔧 Fungsi dipanggil:\n` +
-        `   hitungLuas(${panjang}, ${lebar})     → ${luas} cm²\n` +
-        `   hitungKeliling(${panjang}, ${lebar}) → ${keliling} cm\n\n` +
-        `📐 Persegi panjang ${panjang} × ${lebar}:\n` +
-        `   Luas     = ${luas} cm²\n` +
-        `   Keliling = ${keliling} cm`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-fungsi", hasil, true);
-}
-
-
-// ============================================
-// DEMO 4: TIPE DATA
-// Menunjukkan cara JavaScript menentukan tipe dari sebuah nilai
-// ============================================
-
-function demoTipeData() {
-    // Ambil teks input dari user
-    let inputTeks = document.getElementById("td-input").value;
-
-    // Cek apakah input kosong
-    if (inputTeks === "") {
-        tampilkanOutput("output-tipedata", "⚠️ Ketik sesuatu dulu ya!", false);
-        return;
-    }
-
-    // Coba konversi ke angka untuk mengecek apakah teks tersebut adalah angka
-    let cobaAngka = Number(inputTeks);
-
-    // Tentukan tipe data secara manual berdasarkan nilai inputnya
-    let tipeDeteksi;  // variabel untuk menyimpan nama tipe yang kita deteksi
-    let emoji;        // variabel untuk ikon yang sesuai tipe
-    let nilaiAsli;    // variabel untuk nilai setelah konversi yang tepat
-
-    if (inputTeks === "true" || inputTeks === "false") {
-        // Jika inputnya persis "true" atau "false" → boolean
-        tipeDeteksi = "Boolean";
-        emoji = "✅";
-        nilaiAsli = inputTeks === "true"; // konversi string ke boolean asli
-    } else if (!isNaN(cobaAngka) && inputTeks !== "") {
-        // Jika bisa dikonversi ke angka → number
-        if (inputTeks.includes(".")) {
-            // Jika ada titik desimal → float
-            tipeDeteksi = "Number (Float / Desimal)";
-        } else {
-            // Jika tidak ada titik → integer
-            tipeDeteksi = "Number (Integer / Angka Bulat)";
-        }
-        emoji = "🔢";
-        nilaiAsli = cobaAngka;
+    // Arsitektur If-Else
+    // Prosesor akan mengecek blok ini dari atas. Begitu menemukan yang benar, ia langsung berhenti mengecek yang bawah.
+    if (suhu <= 0) {
+        wujud = 'Padat (Kristal Es)'; // Jika suhu di bawah/sama dengan nol
+    } else if (suhu >= 100) {
+        wujud = 'Gas (Uap Air)'; // Jika suhu di atas/sama dengan seratus
     } else {
-        // Selain itu → string (teks)
-        tipeDeteksi = "String (Teks)";
-        emoji = "📝";
-        nilaiAsli = inputTeks;
+        wujud = 'Cair (Liquid)'; // Jika selain semua kondisi di atas (berarti angka 1 sampai 99)
     }
 
-    // Gunakan typeof untuk mendapat nama tipe dari JavaScript
-    let tipePrimitive = typeof nilaiAsli; // hasilnya: "string", "number", atau "boolean"
-
-    // Susun teks hasil
-    let hasil =
-        `${emoji} Input: "${inputTeks}"\n\n` +
-        `📌 Tipe Terdeteksi : ${tipeDeteksi}\n` +
-        `🔍 typeof          : "${tipePrimitive}"\n\n` +
-        `💡 Tipe data umum:\n` +
-        `   "Teks"  → string\n` +
-        `   42      → number (integer)\n` +
-        `   3.14    → number (float)\n` +
-        `   true    → boolean`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-tipedata", hasil, true);
+    res.innerHTML = `> Mengeksekusi blok IF-ELSE dengan parameter suhu = ${suhu} <br>` +
+                    `> Kondisi Terpenuhi. Status Materi Fisik : <strong style="color:var(--putih-murni)">${wujud}</strong>`;
 }
 
 
-// ============================================
-// DEMO 5: PERCABANGAN
-// Menunjukkan cara program mengambil keputusan dengan if-else
-// ============================================
+/* === 6. LOGIKA LAB 4: PERULANGAN (LOOPING) === */
+function runLoop() {
+    let count = document.getElementById('loop-input').value;
+    const container = document.getElementById('loop-result');
+    
+    // Sistem Pengaman Memori
+    // Membatasi loop maksimal di angka 25 agar memori browser pengguna tidak berat/lagging
+    if(count > 25) count = 25; 
+    if(count < 1) count = 1;
 
-function demoPercabangan() {
-    // Ambil nilai dari input dan ubah ke angka
-    let nilai = Number(document.getElementById("pc-nilai").value);
-
-    // Validasi: pastikan nilai antara 0 sampai 100
-    if (isNaN(nilai) || nilai < 0 || nilai > 100) {
-        tampilkanOutput("output-percabangan", "⚠️ Masukkan angka antara 0 sampai 100!", false);
-        return;
+    container.innerHTML = ''; // Membersihkan kontainer dari hasil loop sebelumnya
+    
+    // PERULANGAN (For Loop)
+    // 1. Mulai dari i = 1
+    // 2. Jika i lebih kecil/sama dengan 'count', ulangi!
+    // 3. Tambahkan nilai i sebanyak 1 (i++) setiap kali satu siklus selesai
+    for (let i = 1; i <= count; i++) {
+        
+        // Kita menggunakan SetTimeout semata-mata untuk memberi efek jeda animasi
+        // sehingga mata kita bisa melihat mesin Javascript mencetak kotak tersebut satu per satu
+        setTimeout(() => {
+            // Membuat elemen kotak HTML secara ajaib lewat Javascript
+            const box = document.createElement('div');
+            box.className = 'loop-box';
+            box.innerText = i; // Menaruh angka i ke dalam kotak
+            
+            // Meletakkan kotak ke dalam layar web
+            container.appendChild(box);
+        }, i * 150); // Jeda waktu dikalikan dengan putarannya (150ms, 300ms, 450ms, dst)
     }
-
-    // Percabangan untuk menentukan grade berdasarkan nilai
-    let grade;   // variabel untuk menyimpan hasil kondisi
-    let emoji;   // variabel untuk ikon sesuai kondisi
-
-    if (nilai >= 90) {
-        // Kondisi pertama: nilai 90 ke atas
-        grade = "A - Sangat Baik 🌟";
-        emoji = "🎉";
-    } else if (nilai >= 75) {
-        // Kondisi kedua: nilai 75 sampai 89
-        grade = "B - Baik 👍";
-        emoji = "😊";
-    } else if (nilai >= 60) {
-        // Kondisi ketiga: nilai 60 sampai 74
-        grade = "C - Cukup";
-        emoji = "😐";
-    } else if (nilai >= 40) {
-        // Kondisi keempat: nilai 40 sampai 59
-        grade = "D - Kurang";
-        emoji = "😕";
-    } else {
-        // Kondisi terakhir (else): nilai di bawah 40
-        grade = "E - Perlu Belajar Lebih Keras";
-        emoji = "📚";
-    }
-
-    // Susun teks hasil
-    let hasil =
-        `${emoji} Nilai: ${nilai}\n\n` +
-        `📋 Proses Percabangan:\n` +
-        `   if (${nilai} >= 90)  → ${nilai >= 90 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   if (${nilai} >= 75)  → ${nilai >= 75 && nilai < 90 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   if (${nilai} >= 60)  → ${nilai >= 60 && nilai < 75 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   if (${nilai} >= 40)  → ${nilai >= 40 && nilai < 60 ? "✅ TERPENUHI" : "❌ tidak"}\n` +
-        `   else              → ${nilai < 40 ? "✅ TERPENUHI" : "❌ tidak"}\n\n` +
-        `🏆 Grade: ${grade}`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-percabangan", hasil, true);
 }
 
 
-// ============================================
-// DEMO 6: PERULANGAN
-// Menunjukkan cara for loop mengeksekusi kode berulang kali
-// ============================================
-
-function demoPerulangan() {
-    // Ambil jumlah bintang dari input dan ubah ke angka
-    let jumlah = Number(document.getElementById("loop-n").value);
-
-    // Validasi: pastikan angka antara 1 sampai 20
-    if (isNaN(jumlah) || jumlah < 1 || jumlah > 20) {
-        tampilkanOutput("output-perulangan", "⚠️ Masukkan angka antara 1 sampai 20!", false);
-        return;
-    }
-
-    // Variabel untuk menampung semua bintang
-    let baris = "";
-
-    // For loop: jalankan blok kode sebanyak 'jumlah' kali
-    // i dimulai dari 1, loop berjalan selama i <= jumlah, i bertambah 1 setiap putaran
-    for (let i = 1; i <= jumlah; i++) {
-        baris += "⭐"; // tambahkan satu bintang setiap putaran
-    }
-
-    // Susun teks penjelasan proses loop
-    let hasil =
-        `🔄 for (let i = 1; i <= ${jumlah}; i++)\n\n` +
-        `📊 Proses:\n`;
-
-    // Tampilkan log setiap iterasi (maksimal 5 baris agar tidak terlalu panjang)
-    let batasLog = Math.min(jumlah, 5); // tampilkan maksimal 5 iterasi
-    for (let i = 1; i <= batasLog; i++) {
-        hasil += `   Putaran ke-${i}: tambah ⭐\n`; // log setiap putaran
-    }
-
-    // Jika iterasi lebih dari 5, tambahkan keterangan
-    if (jumlah > 5) {
-        hasil += `   ... (${jumlah - 5} putaran lainnya)\n`;
-    }
-
-    // Tambahkan hasil akhir bintang
-    hasil += `\n⭐ Hasil (${jumlah} bintang):\n   ${baris}`;
-
-    // Tampilkan ke output
-    tampilkanOutput("output-perulangan", hasil, true);
-}
-
-
-// ============================================
-// FUNGSI PEMBANTU (Helper)
-// Fungsi yang digunakan oleh semua demo di atas
-// ============================================
-
-// Fungsi untuk menampilkan teks ke kotak output
-// Parameter:
-//   id      → id elemen output yang dituju
-//   pesan   → teks yang akan ditampilkan
-//   berhasil → true = teks terang (aktif), false = teks redup (peringatan)
-function tampilkanOutput(id, pesan, berhasil) {
-    // Ambil elemen output berdasarkan id
-    let elOutput = document.getElementById(id);
-
-    // Isi teks outputnya
-    elOutput.textContent = pesan;
-
-    // Tambah atau hapus kelas 'aktif' untuk mengubah warna teks
-    if (berhasil) {
-        elOutput.classList.add("aktif");    // teks jadi terang
-    } else {
-        elOutput.classList.remove("aktif"); // teks tetap redup
-    }
+/* === 7. LOGIKA LAB 5: MODULARITAS FUNGSI === */
+let idProses = 0; // Variabel diluar fungsi untuk menyimpan riwayat putaran pabrik
+function makeJuice() {
+    
+    idProses++; // Setiap tombol ditekan, id akan bertambah 1
+    
+    // Menarik bahan parameter dari pilihan menu Dropdown
+    const bahan = document.getElementById('buah-input').value;
+    const list = document.getElementById('juice-list');
+    
+    // Membuat elemen daftar peluru HTML (<li>)
+    const li = document.createElement('li');
+    li.className = 'juice-item';
+    
+    // Mencetak output hasil olahan fungsi
+    li.innerHTML = `Log Eksekusi [ID:${idProses}] : Fungsi menerima parameter "${bahan}". Nilai (Return) berhasil dikembalikan!`;
+    
+    // prepend() akan meletakkan tulisan paling baru di posisi paling atas (menimpa teks lama)
+    list.prepend(li); 
+    
+    // Menghapus elemen paling bawah jika sudah terdapat lebih dari 4 tulisan 
+    // Tujuannya agar tampilan web tidak kepanjangan
+    if(list.children.length > 4) list.removeChild(list.lastChild);
 }
