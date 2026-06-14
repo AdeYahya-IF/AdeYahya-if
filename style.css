@@ -1,56 +1,44 @@
-/* ============================================================
-   style.css — Sinau Pemrograman Dasar (Lebar Maksimal & Responsif)
-   ============================================================ */
-
-/* ── 1. PENGATURAN AWAL (VARIABEL & RESET) ── */
+/* ── 1. PENGATURAN AWAL & VARIABEL WARNA ── */
 :root {
-    /* Palet Warna Mode Gelap Editorial */
-    --hitam:      #0a0a0a;   /* Latar utama yang sangat gelap */
-    --abu-gelap:  #141414;   /* Warna kotak komponen */
+    --hitam:      #0a0a0a;   
+    --abu-gelap:  #141414;   
     --abu-medium: #333333;   
-    --abu-muda:   #999999;   /* Warna teks sekunder (penjelasan) */
-    --abu-border: #2a2a2a;   /* Warna garis batas tepi */
-    --putih:      #f5f3ee;   /* Putih tulang (digunakan di layar Hero) */
-    --putih-murni:#ffffff;   /* Putih cerah untuk teks bacaan */
-    --aksen:      #c8b97a;   /* Emas pudar yang elegan */
-    --aksen-hover:#b0a164;   /* Emas saat disentuh mouse */
+    --abu-muda:   #999999;   
+    --abu-border: #2a2a2a;   
+    --putih:      #f5f3ee;   
+    --putih-murni:#ffffff;   
+    --aksen:      #c8b97a;   
+    --aksen-hover:#b0a164;   
     
-    /* Konfigurasi Font Terpusat */
-    --font-display: 'Playfair Display', Georgia, serif;  /* Untuk Judul */
-    --font-body:    'Lora', Georgia, serif;                /* Untuk Artikel */
-    --font-mono:    'Source Code Pro', Consolas, monospace; /* Untuk Skrip Kode */
+    --font-display: 'Playfair Display', Georgia, serif;  
+    --font-body:    'Lora', Georgia, serif;                
+    --font-mono:    'Source Code Pro', Consolas, monospace; 
 
-    /* Lebar standar agar website sejajar rapi di tengah */
     --lebar-konten: 1100px;
 }
 
-/* Mengatur ulang margin bawaan browser agar website pas di layar */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* Mengaktifkan gulir halus (smooth scrolling) saat menekan menu navbar */
 html { scroll-behavior: smooth; }
 
-/* Konfigurasi bentuk standar tulisan untuk seluruh website */
 body {
     font-family: var(--font-body);
     background-color: var(--hitam);
     color: var(--putih);
-    line-height: 1.8; /* Jarak atas-bawah spasi antar teks */
-    -webkit-font-smoothing: antialiased; /* Agar teks tajam di semua layar */
+    line-height: 1.8; 
+    -webkit-font-smoothing: antialiased; 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* Mengubah warna teks yang diblok (highlight) oleh user menjadi warna emas */
 ::selection { background: var(--aksen); color: var(--hitam); }
 
 
-/* ── 2. NAVBAR & MENU HAMBURGER (RESPONSIF) ── */
+/* ── 2. NAVBAR & MENU HAMBURGER ── */
 .navbar {
     background: var(--hitam);
     border-bottom: 1px solid var(--abu-border);
-    position: sticky; top: 0; z-index: 1000; /* Menempel di atap layar */
+    position: sticky; top: 0; z-index: 1000; 
 }
 
 .nav-container {
@@ -60,15 +48,12 @@ body {
     position: relative;
 }
 
-/* Tipografi Logo */
 .logo {
     font-family: var(--font-display); font-size: 1.6rem;
     font-weight: 900; color: var(--putih-murni); letter-spacing: -0.5px;
 }
 .logo em { font-style: italic; color: var(--aksen); }
 
-/* --- Pengaturan Ikon Hamburger (Garis Tiga) --- */
-/* Disembunyikan secara default saat dibuka di laptop/PC */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -77,7 +62,6 @@ body {
     z-index: 1001;
 }
 
-/* Bentuk 3 Garis Hamburger */
 .hamburger span {
     width: 28px; height: 3px;
     background-color: var(--putih-murni);
@@ -85,7 +69,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Deretan Tautan Menu Navigasi */
 .nav-links { display: flex; list-style: none; gap: 24px; }
 .nav-links a {
     font-family: var(--font-mono); text-decoration: none;
@@ -94,24 +77,18 @@ body {
 }
 .nav-links a:hover { color: var(--aksen); }
 
-/* Aturan CSS Khusus untuk Layar HP (Maksimal lebar 850px) */
 @media (max-width: 850px) {
-    .hamburger { display: flex; } /* Tampilkan ikon hamburger di HP */
+    .hamburger { display: flex; } 
     
-    /* Menyembunyikan menu tautan awal */
     .nav-links {
         position: absolute; top: 100%; left: 0; width: 100%;
         background: var(--hitam); flex-direction: column; gap: 0;
         border-bottom: 1px solid var(--abu-border);
-        max-height: 0; overflow: hidden; /* Sembunyikan konten dengan max-height 0 */
-        transition: max-height 0.4s ease-in-out; /* Animasi geser turun */
+        max-height: 0; overflow: hidden; 
+        transition: max-height 0.4s ease-in-out; 
     }
     
-    /* Munculkan menu jika diberi class 'active' dari Javascript */
-    .nav-links.active {
-        max-height: 400px; /* Buka ketinggian agar menu terlihat */
-    }
-
+    .nav-links.active { max-height: 400px; }
     .nav-links li { text-align: center; }
     .nav-links a {
         display: block; padding: 18px 20px;
@@ -119,14 +96,13 @@ body {
     }
     .nav-links a:hover { background: var(--abu-gelap); }
 
-    /* Animasi ikon Hamburger berubah menjadi silang (X) */
     .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 }
 
 
-/* ── 3. HERO SECTION (HALAMAN DEPAN TERANG) ── */
+/* ── 3. HERO SECTION ── */
 .hero-section {
     background-color: var(--putih); color: var(--hitam); 
     padding: 100px 30px; position: relative; overflow: hidden;
@@ -150,7 +126,6 @@ body {
 .hero-text h2 em { color: #b0a164; font-style: italic; }
 .hero-text p { font-size: 1.2rem; color: #444; max-width: 550px; margin-bottom: 40px; }
 
-/* Tombol Mulai Membaca */
 .btn-hero {
     display: inline-block; background: var(--hitam); color: var(--putih-murni);
     padding: 15px 35px; border-radius: 40px; text-decoration: none;
@@ -159,11 +134,9 @@ body {
 }
 .btn-hero:hover { background: #333; transform: translateY(-3px); }
 
-/* --- Animasi Logo Melayang di Hero --- */
 .hero-visual { position: relative; width: 300px; height: 350px; flex-shrink: 0; }
 .card-stack { width: 100%; height: 100%; position: relative; }
 
-/* Bentuk Dasar Kartu Logo */
 .lang-card {
     position: absolute; width: 150px; height: 210px; border-radius: 12px;
     background: var(--putih-murni); border: 1px solid #ddd;
@@ -173,55 +146,46 @@ body {
 }
 .lang-card img { width: 85px; height: 85px; object-fit: contain; pointer-events: none; }
 
-/* Posisi spesifik dan Animasi CSS untuk masing-masing logo */
 .js-card { top: 20px; left: 10px; transform: rotate(-8deg); z-index: 3; animation: float1 4s infinite alternate ease-in-out; }
 .py-card { top: 50px; left: 50px; transform: rotate(5deg); z-index: 2; animation: float2 5s infinite alternate ease-in-out; }
 .cpp-card { top: 80px; left: 90px; transform: rotate(15deg); z-index: 1; animation: float3 4.5s infinite alternate ease-in-out; }
 
-/* Keyframe efek naik-turun layaknya bernapas/mengambang */
 @keyframes float1 { to { top: 10px; } }
 @keyframes float2 { to { top: 60px; } }
 @keyframes float3 { to { top: 70px; } }
 
 
-/* ── 4. KONTEN ARTIKEL (TEMA GELAP) ── */
+/* ── 4. KONTEN ARTIKEL & TIPOGRAFI ── */
 #app-content { width: 100%; padding-top: 20px; }
 .page-section { padding: 60px 30px; }
 
-/* Garis abu-abu di antara bab pelajaran */
 .section-divider { border: 0; height: 1px; background: var(--abu-border); max-width: var(--lebar-konten); margin: 0 auto;}
 
 .content-article { text-align: left; max-width: var(--lebar-konten); margin: 0 auto; }
 
-/* Tulisan nomor bab (01, 02, dst) */
 .seksi-nomor {
     font-family: var(--font-mono); font-size: 0.85rem; color: var(--aksen);
     letter-spacing: 0.2em; margin-bottom: 10px;
 }
 
-/* Judul setiap bab */
 .content-article h3 {
     font-family: var(--font-display); font-size: 2.8rem; color: var(--putih-murni);
     margin-bottom: 25px; line-height: 1.2;
 }
 
-/* Sub-Judul kecil */
 .content-article h4 {
     font-family: var(--font-display); font-size: 1.6rem; color: var(--putih-murni);
     margin: 40px 0 20px; border-bottom: 1px solid var(--abu-border); padding-bottom: 10px;
 }
 
-/* Teks panjang biasa */
 .content-article p, .content-article ul, .content-article ol { 
     margin-bottom: 22px; font-size: 1.1rem; max-width: 900px;
 }
 .content-article ul, .content-article ol { padding-left: 25px; }
 .content-article li { margin-bottom: 12px; }
 
-/* Teks paragraf pertama untuk pengenalan (bercetak miring) */
 .lead-paragraph { font-size: 1.35rem; color: var(--putih-murni); font-style: italic; line-height: 1.7; }
 
-/* Kotak kutipan khusus (Quote Box) */
 .pull-quote {
     font-family: var(--font-display); font-size: 1.5rem; font-style: italic;
     color: var(--aksen); border-left: 3px solid var(--aksen);
@@ -236,25 +200,22 @@ body {
     border-radius: 6px; overflow: hidden; max-width: 100%; margin: 40px 0;
 }
 
-/* Judul hitam kecil di atas kode (cth: "Struktur C++") */
 .kode-label {
     font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
     color: var(--abu-muda); background: #1a1a1a; padding: 12px 15px;
     border-bottom: 1px solid var(--abu-border); letter-spacing: 0.1em; font-weight: bold;
 }
 
-/* Area ketikan kode */
 .kode-blok-center pre {
     padding: 20px; overflow-x: auto; font-family: var(--font-mono);
     font-size: 0.95rem; line-height: 1.6; color: #d4d4d4;
 }
 
-/* Warnai tiap-tiap kata di dalam kode (Mirip Visual Studio Code) */
-.kode-keyword { color: #c586c0; }       /* Ungu: instruksi logika seperti int, string, if */
-.kode-string { color: #ce9178; }        /* Oranye: teks/kalimat */
-.kode-number { color: #b5cea8; }        /* Hijau Terang: angka murni */
-.kode-comment { color: #6a9955; font-style: italic; } /* Hijau Gelap: Komentar programmer */
-.kode-fungsi { color: #dcdcaa; }        /* Kuning: Nama fungsi */
+.kode-keyword { color: #c586c0; }       
+.kode-string { color: #ce9178; }        
+.kode-number { color: #b5cea8; }        
+.kode-comment { color: #6a9955; font-style: italic; } 
+.kode-fungsi { color: #dcdcaa; }        
 
 code {
     font-family: var(--font-mono); font-size: 0.85em; background: rgba(255,255,255,0.08);
@@ -262,7 +223,7 @@ code {
 }
 
 
-/* ── 6. KOTAK DEMO INTERAKTIF (LABORATORIUM) ── */
+/* ── 6. KOTAK DEMO INTERAKTIF ── */
 .demo-card {
     background: var(--abu-gelap); border: 1px solid var(--abu-border);
     border-radius: 10px; margin: 50px 0; overflow: hidden; max-width: 100%;
@@ -273,13 +234,11 @@ code {
     background: rgba(255,255,255,0.02);
 }
 
-/* Judul Kotak Lab */
 .demo-judul { font-weight: bold; color: var(--aksen); font-size: 1.05rem; font-family: var(--font-mono); letter-spacing: 0.5px;}
 
 .demo-body { padding: 30px; }
 .demo-input-group { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin-bottom: 20px;}
 
-/* Pengaturan Bentuk Kolom Ketikan (Input Teks/Angka) */
 .demo-input, .demo-select {
     padding: 12px 18px; background: rgba(255,255,255,0.05);
     border: 1px solid var(--abu-border); border-radius: 6px;
@@ -288,26 +247,16 @@ code {
     transition: border 0.3s;
 }
 
-/* --- PERBAIKAN DROPDOWN (SELECT) --- */
-.demo-select {
-    cursor: pointer; /* Ubah mouse jadi tangan saat menyentuh panah dropdown */
-}
-
-/* Perbaikan krusial agar tulisan di dalam kotak yang sedang dibuka (dropdown options) 
-   tidak menjadi putih menyatu dengan background putih bawaan browser.
-*/
+.demo-select { cursor: pointer; }
 .demo-select option {
-    background-color: var(--hitam); /* Berikan background hitam pekat */
-    color: var(--putih-murni);      /* Berikan tulisan putih */
-    font-family: var(--font-mono);  /* Sesuaikan font agar rapi */
+    background-color: var(--hitam); 
+    color: var(--putih-murni);      
+    font-family: var(--font-mono);  
 }
-/* --------------------------------- */
 
-/* Efek saat form sedang diketik */
 .demo-input:focus, .demo-select:focus { border-color: var(--aksen); }
 .demo-input-kecil { flex: 0 0 auto; width: 130px; min-width: unset; }
 
-/* Pengaturan Bentuk Tombol Aksi */
 .btn-action {
     background: var(--aksen); color: var(--hitam); border: none;
     padding: 12px 25px; border-radius: 6px; font-family: var(--font-mono);
@@ -316,14 +265,12 @@ code {
 }
 .btn-action:hover { background: var(--aksen-hover); transform: translateY(-2px);}
 
-/* Bentuk Layar Hitam Hasil/Output di bawah Form */
 .demo-output {
     background: var(--hitam); border: 1px dashed var(--abu-border);
     padding: 20px; border-radius: 6px; font-family: var(--font-mono);
     font-size: 0.9rem; color: var(--aksen); min-height: 60px; line-height: 1.7;
 }
 
-/* Elemen khusus untuk demo "Perulangan" (Kotak angka yang muncul berderet) */
 .loop-box {
     width: 45px; height: 45px; background-color: var(--aksen); color: var(--hitam);
     display: flex; justify-content: center; align-items: center; border-radius: 4px; 
@@ -331,14 +278,13 @@ code {
 }
 @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
 
-/* Elemen khusus untuk demo "Fungsi Pabrik" (Log Teks) */
 .juice-item {
     background: rgba(255,255,255,0.05); padding: 10px 15px; margin-bottom: 8px; 
     border-left: 3px solid var(--aksen); font-family: var(--font-mono); font-size: 0.9rem; color: var(--putih);
 }
 
 
-/* ── 7. CALL TO ACTION (CTA) DI BAGIAN BAWAH ── */
+/* ── 7. CALL TO ACTION (CTA) BAWAH ── */
 .cta-section {
     text-align: center; padding: 100px 30px; 
     background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
@@ -348,7 +294,6 @@ code {
 .cta-section h2 { font-family: var(--font-display); font-size: 3rem; color: var(--putih-murni); margin-bottom: 20px; line-height: 1.2; }
 .cta-section p { font-size: 1.15rem; color: var(--abu-muda); margin-bottom: 40px; }
 
-/* Tombol Playlist Youtube */
 .btn-cta {
     display: inline-block; background: var(--aksen); color: var(--hitam);
     padding: 18px 45px; border-radius: 50px; text-decoration: none;
@@ -361,7 +306,7 @@ code {
 }
 
 
-/* ── 8. FOOTER WEBSITE (KAKI HALAMAN) ── */
+/* ── 8. FOOTER WEBSITE ── */
 .site-footer {
     background: var(--abu-gelap); border-top: 1px solid var(--abu-border);
     padding: 70px 30px 30px;
@@ -385,10 +330,9 @@ code {
     padding-top: 25px; font-family: var(--font-mono); font-size: 0.8rem; color: #666;
 }
 
-/* ── 9. MENGATUR TAMPILAN DI LAYAR HP (MOBILE RESPONSIVE) ── */
 @media (max-width: 850px) {
     .hero-container { flex-direction: column; text-align: left; align-items: flex-start;}
     .hero-visual { align-self: center; margin-top: 30px; }
-    .footer-container { grid-template-columns: 1fr; gap: 40px;} /* Kolom footer menjadi 1 tumpukan vertikal */
+    .footer-container { grid-template-columns: 1fr; gap: 40px;} 
     .cta-section h2 { font-size: 2.2rem; }
 }

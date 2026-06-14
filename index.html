@@ -8,17 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Code+Pro:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- NAVIGASI -->    
     <nav class="navbar">
         <div class="nav-container">
             <h1 class="logo">Sinau<em>Pemrograman.</em></h1>
-            
+           
             <div class="hamburger" id="hamburger">
-                <span></span> <span></span> <span></span> </div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
             <ul class="nav-links" id="nav-links">
                 <li><a href="#pengantar" onclick="closeMenu()">Pengantar</a></li>
@@ -31,6 +34,7 @@
         </div>
     </nav>
 
+<!-- HERO SECTION -->
     <section class="hero-section" id="hero">
         <div class="hero-container">
             <div class="hero-text">
@@ -56,8 +60,10 @@
         </div>
     </section>
 
+<!-- KONTEN UTAMA -->
     <main id="app-content">
 
+    <!-- Pengantar -->
         <section id="pengantar" class="page-section">
             <article class="content-article">
                 <div class="seksi-nomor">01</div>
@@ -66,7 +72,6 @@
                 <p class="lead-paragraph">Bahasa yang kita gunakan sehari-hari penuh dengan ambiguitas dan konteks. Ketika kita berkata "tolong buatkan kopi", manusia lain mengerti apa yang harus dilakukan berdasarkan intuisi dan pengalamannya.</p>
                 <p>Namun, komputer tidak memiliki intuisi. Ia adalah benda mati yang hanya memahami dua hal: ada arus listrik (1) dan tidak ada arus listrik (0). Agar "bahasa manusia" tadi bisa dimengerti oleh "logika komputer", kita harus membangun sebuah jembatan.</p>
                 <p>Jembatan itulah yang disebut dengan <strong>Algoritma</strong>. Algoritma adalah urutan langkah-langkah logis, pasti, dan tidak ambigu yang dirancang untuk memecahkan sebuah masalah. Komputer membutuhkan algoritma dengan presisi absolut:</p>
-                
                 <ol>
                     <li>Verifikasi apakah air di dalam teko lebih dari 250ml. Jika tidak, isi air.</li>
                     <li>Nyalakan elemen pemanas teko.</li>
@@ -81,14 +86,15 @@
 
         <hr class="section-divider">
 
+    <!-- Variabel -->
         <section id="variabel" class="page-section">
             <article class="content-article">
                 <div class="seksi-nomor">02</div>
                 <h3>Variabel dan Manipulasi Memori</h3>
                 
                 <p class="lead-paragraph">Sebelum komputer bisa memproses algoritma, ia harus "mengingat" data apa yang sedang ia kerjakan. Di sinilah peran memori (RAM) dan konsep Variabel menjadi sangat krusial.</p>
-                <p>Secara fisik, memori komputer terdiri dari miliaran sel kecil. Membaca dan menulis di alamat fisik memori tersebut (misalnya: <code>0x7FFF5FB</code>) sangatlah rumit. Oleh karena itu, kita menggunakan <strong>Variabel</strong>.</p>
-                <p>Variabel adalah "alias" atau label yang kita tempelkan pada sebuah laci di dalam memori. Alih-alih mengingat kode mesin yang rumit, kita cukup memberi nama laci tersebut dan mendeklarasikan <strong>Tipe Data</strong> apa yang akan masuk ke laci tersebut (Teks, Angka Bulat, Angka Desimal, atau Logika).</p>
+                <p>Secara fisik, memori komputer terdiri dari miliaran sel kecil. Membaca dan menulis di alamat fisik memori tersebut sangatlah rumit. Oleh karena itu, kita menggunakan <strong>Variabel</strong>.</p>
+                <p>Variabel adalah "alias" atau label yang kita tempelkan pada sebuah laci di dalam memori. Alih-alih mengingat kode mesin yang rumit, kita cukup memberi nama laci tersebut dan mendeklarasikan <strong>Tipe Data</strong> apa yang akan masuk ke laci tersebut.</p>
                 
                 <div class="kode-blok-center">
                     <div class="kode-label">Struktur Alokasi Memori di C++</div>
@@ -110,7 +116,7 @@
 
                 <div class="demo-card">
                     <div class="demo-header">
-                        <span class="demo-judul">Lab Interaktif: Detektor Tipe Data CPU</span>
+                        <span class="demo-judul">Detektor Tipe Data CPU</span>
                     </div>
                     <div class="demo-body">
                         <div class="demo-input-group">
@@ -124,6 +130,7 @@
 
         <hr class="section-divider">
 
+    <!-- Operator -->
         <section id="operator" class="page-section">
             <article class="content-article">
                 <div class="seksi-nomor">03</div>
@@ -133,7 +140,7 @@
                 <p>Dalam C++, kita menginstruksikan prosesor dengan menggunakan simbol-simbol khusus yang disebut <strong>Operator</strong>. Berikut adalah kategori utamanya:</p>
                 
                 <ul>
-                    <li><strong>Operator Aritmatika:</strong> Layaknya kalkulator (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>). Ada satu operator krusial yaitu <strong>Modulo (<code>%</code>)</strong> yang berfungsi mencari <em>sisa hasil bagi</em>. (Contoh: 10 dibagi 3 sisanya 1).</li>
+                    <li><strong>Operator Aritmatika:</strong> Layaknya kalkulator (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>). Ada satu operator krusial yaitu <strong>Modulo (<code>%</code>)</strong> yang berfungsi mencari <em>sisa hasil bagi</em>.</li>
                     <li><strong>Operator Perbandingan:</strong> Membandingkan dua nilai (<code>></code>, <code><</code>, <code>==</code>) dan selalu mengembalikan nilai Boolean logika (<code>true</code>/<code>false</code>).</li>
                     <li><strong>Operator Logika:</strong> Digunakan untuk menggabungkan syarat. <strong>AND (<code>&&</code>)</strong> mewajibkan semua syarat benar, sedangkan <strong>OR (<code>||</code>)</strong> cukup salah satu saja yang benar.</li>
                 </ul>
@@ -147,10 +154,10 @@
     <span class="kode-keyword">int</span> num1 = <span class="kode-number">10</span>;
     <span class="kode-keyword">int</span> num2 = <span class="kode-number">3</span>;
 
-    <span class="kode-comment">// 1. Melakukan komputasi Aritmatika (Sisa Bagi / Modulo)</span>
+    <span class="kode-comment">// Melakukan komputasi Aritmatika (Sisa Bagi / Modulo)</span>
     <span class="kode-keyword">int</span> hasilBagi = num1 % num2;
 
-    <span class="kode-comment">// 2. Melakukan evaluasi Perbandingan</span>
+    <span class="kode-comment">// Melakukan evaluasi Perbandingan</span>
     <span class="kode-keyword">bool</span> cekLebihBesar = (num1 > num2);
 
     cout << <span class="kode-string">"Sisa bagi (Modulo)  : "</span> << hasilBagi << endl;
@@ -162,7 +169,7 @@
 
                 <div class="demo-card">
                     <div class="demo-header">
-                        <span class="demo-judul">Lab Interaktif: Mesin Analisis ALU (Kalkulator Komprehensif)</span>
+                        <span class="demo-judul">Mesin Analisis ALU</span>
                     </div>
                     <div class="demo-body">
                         <p style="color:var(--abu-muda); font-size: 0.95rem; margin-bottom: 15px; font-family: var(--font-body);">Masukan 2 angka. Sistem akan langsung menghitung operasi Aritmatika sekaligus menganalisis Operator Perbandingannya.</p>
@@ -188,6 +195,7 @@
 
         <hr class="section-divider">
 
+    <!-- Percabangan -->
         <section id="percabangan" class="page-section">
             <article class="content-article">
                 <div class="seksi-nomor">04</div>
@@ -222,7 +230,7 @@
 
                 <div class="demo-card">
                     <div class="demo-header">
-                        <span class="demo-judul">Lab Interaktif: Sensor Keputusan Suhu (If-Else)</span>
+                        <span class="demo-judul">Sensor Keputusan Suhu (If-Else)</span>
                     </div>
                     <div class="demo-body">
                         <div class="demo-input-group">
@@ -237,13 +245,14 @@
 
         <hr class="section-divider">
 
+    <!-- Perulangan -->
         <section id="perulangan" class="page-section">
             <article class="content-article">
                 <div class="seksi-nomor">05</div>
                 <h3>Perulangan Logika (Looping)</h3>
                 
                 <p class="lead-paragraph">Batas terdalam ketahanan manusia adalah kelelahan fisik. Sebaliknya, keunggulan mutlak mesin adalah kemampuannya menjalankan instruksi yang sama jutaan kali secara akurat tanpa merasa bosan.</p>
-                <p>Di dunia pemrograman, kita sangat menghindari *copy-paste* kode yang sama. Kita menggunakan <strong>Looping</strong>. Jenis perulangan yang paling sering dipakai adalah <strong>For Loop</strong>. Ia memerlukan 3 parameter utama di dalam kurungnya:</p>
+                <p>Di dunia pemrograman, kita sangat menghindari penulisan kode repetitif. Kita menggunakan <strong>Looping</strong>. Jenis perulangan yang paling sering dipakai adalah <strong>For Loop</strong>. Ia memerlukan 3 parameter utama di dalam kurungnya:</p>
                 
                 <ol>
                     <li><strong>Start:</strong> Dari angka berapa perhitungan dimulai.</li>
@@ -271,7 +280,7 @@
 
                 <div class="demo-card">
                     <div class="demo-header">
-                        <span class="demo-judul">Lab Interaktif: Mesin Iterasi Render Otomatis</span>
+                        <span class="demo-judul">Mesin Iterasi Render Otomatis</span>
                     </div>
                     <div class="demo-body">
                         <div class="demo-input-group">
@@ -286,40 +295,67 @@
 
         <hr class="section-divider">
 
+    <!-- Fungsi & Prosedur -->
         <section id="fungsi" class="page-section">
             <article class="content-article">
                 <div class="seksi-nomor">06</div>
-                <h3>Fungsi: Membangun Mesin Modular</h3>
+                <h3>Fungsi & Prosedur: Membangun Mesin Modular</h3>
                 
-                <p class="lead-paragraph">Ketika kodemu mencapai ribuan baris, menuliskan instruksi yang lurus terus menerus akan menjadikannya berantakan dan mustahil diperbaiki. Solusinya adalah memecahnya menjadi modul-modul logika kecil yang disebut <strong>Fungsi</strong>.</p>
-                <p>Bayangkan Fungsi seperti sebuah "Mesin Pabrik Pengolah". Kamu cukup merakitnya satu kali, dan memanggil/menekan tombolnya berkali-kali saat dibutuhkan. Mesin ini bisa menerima <em>Parameter</em> (bahan baku input), mengolahnya, dan menghasilkan <em>Return</em> (produk output akhir).</p>
+                <p class="lead-paragraph">Ketika kodemu mencapai ribuan baris, menuliskan instruksi yang lurus terus menerus akan menjadikannya berantakan. Solusinya adalah memecahnya menjadi modul-modul logika kecil yang disebut <strong>Fungsi</strong> atau <strong>Prosedur</strong>.</p>
+                <p>Mereka bekerja seperti "Mesin Pabrik". Kamu merakitnya satu kali, dan memanggil/menekan tombolnya berkali-kali saat dibutuhkan. Mesin ini bisa menerima <em>Parameter</em> (bahan baku input). Namun, ada perbedaan cara kerja saat mereka mengeluarkan hasil:</p>
+                
+                <ul>
+                    <li><strong>Prosedur (Void):</strong> Mesin ini melakukan aksi langsung (seperti mencetak ke layar), tetapi <strong>tidak</strong> mengembalikan nilai yang bisa disimpan. Ia menggunakan kata kunci <code>void</code>.</li>
+                    <li><strong>Fungsi (Return):</strong> Mesin ini mengolah data dan <strong>wajib</strong> mengembalikan sebuah nilai akhir (return) untuk disimpan ke dalam sebuah variabel.</li>
+                </ul>
 
                 <div class="kode-blok-center">
-                    <div class="kode-label">Deklarasi & Pemanggilan Fungsi di C++</div>
+                    <div class="kode-label">Perbedaan Fungsi dan Prosedur di C++</div>
                     <pre><code><span class="kode-keyword">#include</span> &lt;iostream&gt;
 <span class="kode-keyword">#include</span> &lt;string&gt;
 <span class="kode-keyword">using namespace</span> std;
 
-<span class="kode-comment">// 1. TAHAP MERAKIT MESIN PENGOLAHAN (Deklarasi)</span>
+<span class="kode-comment">// 1. PROSEDUR (Menggunakan 'void', tidak mengembalikan nilai/return)</span>
+<span class="kode-keyword">void</span> <span class="kode-fungsi">cetakLabel</span>(<span class="kode-keyword">string</span> namaBarang) {
+    cout << <span class="kode-string">"--- LABEL BARANG: "</span> << namaBarang << <span class="kode-string">" ---"</span> << endl;
+}
+
+<span class="kode-comment">// 2. FUNGSI (Memiliki tipe data 'string', wajib mengembalikan nilai/return)</span>
 <span class="kode-keyword">string</span> <span class="kode-fungsi">buatProduk</span>(<span class="kode-keyword">string</span> bahan) {
-    <span class="kode-keyword">string</span> hasil = <span class="kode-string">"Log: Menerima "</span> + bahan + <span class="kode-string">". Output berhasil dibuat!"</span>;
-    <span class="kode-keyword">return</span> hasil; <span class="kode-comment">// Mengembalikan (Return) hasil akhir mesin</span>
+    <span class="kode-keyword">return</span> <span class="kode-string">"Produk dari "</span> + bahan; 
 }
 
 <span class="kode-keyword">int</span> <span class="kode-fungsi">main</span>() {
-    <span class="kode-comment">// 2. TAHAP MENGGUNAKAN MESIN (Pemanggilan Parameter)</span>
-    <span class="kode-keyword">string</span> outputAkhir = <span class="kode-fungsi">buatProduk</span>(<span class="kode-string">"Daun Teh Hijau"</span>);
+    <span class="kode-comment">// Memanggil Prosedur: Langsung mengeksekusi aksi cetak ke layar</span>
+    <span class="kode-fungsi">cetakLabel</span>(<span class="kode-string">"Biji Kopi Hitam"</span>);
     
-    cout << outputAkhir;
+    <span class="kode-comment">// Memanggil Fungsi: Nilai akhirnya wajib ditangkap/disimpan ke variabel</span>
+    <span class="kode-keyword">string</span> hasilPabrik = <span class="kode-fungsi">buatProduk</span>(<span class="kode-string">"Biji Kopi Hitam"</span>);
+    
     <span class="kode-keyword">return</span> <span class="kode-number">0</span>;
 }</code></pre>
                 </div>
 
                 <div class="demo-card">
                     <div class="demo-header">
-                        <span class="demo-judul">Lab Interaktif: Pemanggilan Parameter Fungsi</span>
+                        <span class="demo-judul">Pemanggilan Prosedur (Void)</span>
                     </div>
                     <div class="demo-body">
+                        <p style="color:var(--abu-muda); font-size: 0.95rem; margin-bottom: 15px; font-family: var(--font-body);">Prosedur hanya melakukan perintah aksi langsung ke sistem tanpa mengembalikan nilai (return) ke memori variabel.</p>
+                        <div class="demo-input-group">
+                            <input type="text" id="proc-input" placeholder="Masukkan nama barang..." class="demo-input">
+                            <button class="btn-action" onclick="runProcedure()">Jalankan Prosedur (Cetak)</button>
+                        </div>
+                        <div class="demo-output" id="proc-result">Menunggu instruksi pemanggilan prosedur...</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <span class="demo-judul">Pemanggilan Fungsi (Return Value)</span>
+                    </div>
+                    <div class="demo-body">
+                        <p style="color:var(--abu-muda); font-size: 0.95rem; margin-bottom: 15px; font-family: var(--font-body);">Fungsi mengolah bahan (parameter) dan menghasilkan barang baru (return) yang kemudian disimpan ke riwayat eksekusi.</p>
                         <div class="demo-input-group">
                             <select id="buah-input" class="demo-select" style="max-width: 230px;">
                                 <option value="Biji Kopi Hitam">Biji Kopi Hitam</option>
@@ -334,6 +370,7 @@
             </article>
         </section>
 
+    <!-- CTA -->
         <section class="cta-section">
             <div class="cta-container">
                 <h2>Ingin belajar lebih lanjut?</h2>
@@ -344,6 +381,7 @@
 
     </main>
 
+<!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-col">
